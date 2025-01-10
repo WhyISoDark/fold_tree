@@ -16,11 +16,17 @@ if foldseekpath == 'provided':
 	foldseekpath = rootdir + "foldseek/foldseek"
 
 rule all:
-	input:
-	#get all treescore and rf distance files for all alntypes
-		#expand( "{folder}/RFdistances_{exp}_.json" , folder = folders , exp = exp) ,
-		expand( "{folder}/plddt.json" , folder = config["folder"] ) ,
-		expand("{folder}/{mattype}_struct_tree.PP.nwk.rooted.final", folder = config["folder"], mattype = mattypes),
+    input:
+        # always needed for normal pipeline
+        expand("{folder}/plddt.json", folder=config["folder"]),
+        expand("{folder}/{mattype}_struct_tree.PP.nwk.rooted.final", 
+               folder=config["folder"], mattype=mattypes),
+
+        # only add these if we're not using custom PDB
+        (expand("{folder}/sequence_dataset.csv", folder=config["folder"])
+         if not config["custom_structs"] else []),
+        (expand("{folder}/finalset.csv", folder=config["folder"])
+         if not config["custom_structs"] else [])
 
 rule mad_root_post:
 	conda:
