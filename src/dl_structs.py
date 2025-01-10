@@ -11,7 +11,15 @@ it also filters the structures based on the plddt score
 
 '''
 
-
+# If you want to skip the entire script whenever custom_structs=True:
+if snakemake.params.custom_structs:
+    # produce an empty finalset.csv
+    with open(snakemake.output[0], "w") as f:
+        pass
+    # log a quick message
+    with open(snakemake.log[0], "w") as lg:
+        lg.write("Skipping dl_structs.py entirely because custom_structs=True\n")
+    sys.exit(0)
 
 infolder = snakemake.input[0].split('/')[:-1]
 infolder = ''.join( [i + '/' for i in infolder])
