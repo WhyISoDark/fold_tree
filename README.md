@@ -12,7 +12,7 @@ It's associated with the manuscript located at https://www.biorxiv.org/content/1
 
 ## Try it out on Collab
 
-We have created a collab notebook which allows you to try out foldtree without installing anything. You can find it here:
+We have created a collab notebook which allows you to try out foldtree without installing anything. You can find it here: Working colab notebook ->
 [https://colab.research.google.com/github/WhyISoDark/fold_tree/blob/main/notebooks/Foldtree.ipynb]
 
 
